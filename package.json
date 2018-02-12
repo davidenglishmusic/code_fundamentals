@@ -1,0 +1,13 @@
+{
+  "name": "code_fundamentals",
+  "version": "1.0.0",
+  "repository": "https://github.com/davidenglishmusic/code_fundamentals.git",
+  "author": "davidenglishmusic <david@operaonfilm.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "less": "^3.0.0",
+    "less-plugin-clean-css": "^1.5.1"
+  }
+}

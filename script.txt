@@ -1,0 +1,72 @@
+Let's get some output:
+
+puts 'Hi there'
+
+Let's look at variables. A variable is a label to which we can assign a value:
+
+pi_number = 3.14
+phrase = "Pi is approximately equal to "
+
+puts phrase + pi_number
+
+In addition to single numbers and sentences, we might want to assign a list to a variable:
+
+my_list = ['apples', 'oranges', 'bananas']
+some_lucky_numbers = [6, 4, 9]
+
+Let's go loop through the lists and print each item:
+
+puts 'Fruits:'
+
+my_list.each do |fruit|
+	puts fruit
+end
+
+puts 'Lucky numbers:'
+
+some_lucky_numbers.each do |lucky_number|
+	puts lucky_number
+end
+
+Let's run some comparisons:
+
+puts 5 > 4
+
+puts 12 == 12
+
+puts 'Apples' == 'Oranges'
+
+puts 'Green' == 'Green'
+
+puts 3 <= 2
+
+Once you can compare, you can respond differently according to information coming in:
+
+name = 'Leslie'
+
+if name == 'Leslie"
+	puts 'Hello Leslie'
+else
+	puts 'Hi there'
+end
+
+Much of coding relates to organization. One of the main ways we organize and re-use code is through "functions". Let's define one:
+
+def greeting
+	'Hello'
+end
+
+puts greeting
+
+Going further, we can define a function with parameters, making them highly re-usable.
+
+def greet(name)
+	'Hello ' + name
+end
+
+puts greet('Pat')
+puts greet('Jordan')
+
+
+That is pretty much it. Everything builds on top of those ideas.
+Variables, Loops, Conditions, Functions
