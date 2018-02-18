@@ -1,0 +1,43 @@
+{
+  "slides": [{
+      "preface": "Let's get some output.",
+      "code": "puts 'Hi there'",
+      "result": "Hi there"
+    },
+    {
+      "preface": "Let's look at variables. A variable is a label to which we can assign a value.",
+      "code": "pi_number = 3.14\nphrase = 'Pi is approximately equal to '\n\nputs phrase + pi_number",
+      "result": "Pi is approximately equal to 3.14"
+    },
+    {
+      "preface": "In addition to single numbers and sentences, we might want to assign a list to a variable.",
+      "code": "my_list = ['apples', 'oranges', 'bananas']\nsome_lucky_numbers = [6, 4, 9]"
+    },
+    {
+      "preface": "Let's go loop through the lists and print out each item.",
+      "code": "puts 'Fruits:'\nfor (fruit in my_list) do\n  puts fruit\nend\n\nputs 'Lucky numbers:'\nfor (number in some_lucky_numbers) do \n  puts lucky_number\nend",
+      "result": "Fruits:\napples\noranges\nbananas\nLucky numbers:\n6\n4\n9"
+    },
+    {
+      "preface": "Let's run some comparisons.",
+      "code": "puts 5 > 4\nputs 12 == 12\nputs 'Apples' == 'Oranges'\nputs 'Green' == 'Green'\nputs 3 <= 2",
+      "result": "true\ntrue\nfalse\ntrue\nfalse"
+    },
+    {
+      "preface": "Once you can compare, you can respond differently according to information coming in.",
+      "code": "name = 'Leslie'\nif name == 'Leslie'\n  puts 'Hello Leslie'\nelse\n  puts 'Hi there'\nend",
+      "result": "Hello Leslie"
+    },
+    {
+      "preface": "Much of coding relates to organization. One of the main ways we organize and re-use code is through 'functions'. Let's define one.",
+      "code": "def greeting\n  'Hello'\nend\nputs greeting",
+      "result": "Hello"
+    },
+    {
+      "preface": "Going further, we can define a function with parameters, making them highly re-usable.",
+      "code": "def greet(name)\n  'Hello ' + name\nend\n\nputs greet('Pat')\nputs greet('Jordan')",
+      "result": "Hello Pat\nHello Jordan"
+    }
+  ],
+  "conclusion": "That is pretty much it. Everything builds on top of those ideas.\nVariables, Loops, Conditions, Functions"
+}
