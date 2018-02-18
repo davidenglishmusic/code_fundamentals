@@ -1,5 +1,5 @@
-@codepad-color: #FFFEFB;
-@prompt-color: #012;
+@code-side-color: #FFFEFB;
+@prompt-side-color: #012;
 
 body {
   margin: 0;
@@ -7,38 +7,45 @@ body {
   font-family: 'Open Sans', sans-serif;
   display: flex;
   flex-direction: column;
-
   @media (min-width: 768px) {
     flex-direction: row;
   }
 
-  #codepad,
-  #prompt {
+  #code-side,
+  #prompt-side {
     width: 100%;
     height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
-
     @media (min-width: 768px) {
       width: 50%;
       height: 100vh;
     }
-  }
 
-  #codepad {
-    background-color: @codepad-color;
-    color: darken(@codepad-color, 95%);
-
-    .code-wrapper {
+    .wrapper {
       display: flex;
       flex-direction: column;
+
+      .line {
+        white-space: pre;
+      }
     }
   }
 
-  #prompt {
-    background-color: @prompt-color;
-    color: lighten(@prompt-color, 95%);
+  #code-side {
+    background-color: @code-side-color;
+    color: darken(@code-side-color, 95%);
+    flex-direction: column;
+
+    #preface {
+      padding: 0 2rem 2rem;
+    }
+  }
+
+  #prompt-side {
+    background-color: @prompt-side-color;
+    color: lighten(@prompt-side-color, 95%);
   }
 }
 
