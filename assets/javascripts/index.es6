@@ -1,13 +1,39 @@
 const letterShowTime = 100;
-const sceneLength = 10000;
 const scriptPath = 'script.json'
 const prefaceDiv = document.getElementById("preface");
 const codeWrapper = document.querySelector("#code-side .wrapper");
 const promptWrapper = document.querySelector("#prompt-side .wrapper");
+const nextButton = document.querySelector("#nav #next");
+const previousButton = document.querySelector("#nav #previous");
+let currentScene;
+let scenes;
 
 document.addEventListener("DOMContentLoaded", () => {
   loadJSON(response => {
-    runScript(JSON.parse(response));
+    const json = JSON.parse(response);
+    scenes = json.scenes;
+    currentScene = scenes[0];
+    runScene(currentScene);
+  });
+
+  nextButton.addEventListener("click", () => {
+    if (scenes !== undefined) {
+      const currentIndex = scenes.findIndex(scene => scene === currentScene);
+      if (currentIndex + 1 < (scenes.length)) {
+        currentScene = scenes[currentIndex + 1]
+        runScene(currentScene);
+      }
+    }
+  });
+
+  previousButton.addEventListener("click", () => {
+    if (scenes !== undefined) {
+      const currentIndex = scenes.findIndex(scene => scene === currentScene);
+      if (currentIndex - 1 >= 0) {
+        currentScene = scenes[currentIndex - 1];
+        runScene(scenes[currentIndex - 1]);
+      }
+    }
   });
 });
 
@@ -23,61 +49,47 @@ function loadJSON(callback) {
   xobj.send(null);
 }
 
-function runScript(json) {
-  let initialDelay = 0;
-
-  for (const scene of json.scenes) {
-    setTimeout(() => {
-      nextScene(scene);
-    }, initialDelay)
-    initialDelay += sceneLength;
-  }
-}
-
-function nextScene(scene) {
+function runScene(scene) {
   codeWrapper.innerHTML = "";
   prefaceDiv.innerHTML = "";
   promptWrapper.innerHTML = "";
 
   prefaceDiv.innerHTML = scene.preface;
 
+  let codeInitialDelay = 0;
+
   for (const codeLine of scene.code.split(/\n/)) {
     let codeSpan = document.createElement('span');
     codeSpan.textContent = codeLine;
-    codeSpan.setAttribute('class', 'line');
+    codeSpan.className = 'line hide';
     codeWrapper.appendChild(codeSpan);
+    convertToHiddenLetters(codeSpan);
+    setTimeout(() => {
+      codeSpan.classList.remove('hide');
+      typeCode(codeSpan);
+    }, codeInitialDelay)
+    codeInitialDelay += letterShowTime * codeSpan.childElementCount;
   }
 
   for (const promptLine of scene.prompt.split(/\n/)) {
     let promptSpan = document.createElement('span');
     promptSpan.textContent = promptLine;
-    promptSpan.setAttribute('class', 'line');
+    promptSpan.className = 'line hide';
     promptWrapper.appendChild(promptSpan);
+    promptSpan.classList.remove('hide');
   }
 }
 
-function typeCode() {
-  const codeLines = document.getElementsByClassName("code-line");
-  for (const line of codeLines) {
-    const text = line.textContent;
-    let letters = '';
-    for (let i = 0; i < text.length; i++) {
-      letters += `<span class="letter hide">${text[i]}</span>`;
-    }
-    line.innerHTML = letters;
+function convertToHiddenLetters(line) {
+  const text = line.textContent;
+  let letters = '';
+  for (let i = 0; i < text.length; i++) {
+    letters += `<span class="letter hide">${text[i]}</span>`;
   }
-
-  let initialDelay = 0
-
-  for (const line of codeLines) {
-    setTimeout(() => {
-      showLetters(line);
-    }, initialDelay)
-    initialDelay += line.children.length * letterShowTime;
-  }
+  line.innerHTML = letters;
 }
 
-function showLetters(line) {
+function typeCode(line) {
   for (let i = 0; i < line.children.length; i++) {
     ((i => {
       setTimeout(() => {
