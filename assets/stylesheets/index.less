@@ -57,11 +57,12 @@ body {
 
     .button {
       border-radius: 3rem;
-      background-color: transparent;
-      border: 1px solid white;
+      background-color: @code-side-color;
+      border: 1px solid;
+      border-color: @prompt-side-color;
+      color: @prompt-side-color;
       width: 2rem;
       height: 2rem;
-      color: white;
       font-size: 1rem;
       display: flex;
       align-items: center;
@@ -70,8 +71,19 @@ body {
       cursor: pointer;
 
       &:hover {
-        background-color: #FFF;
-        color: #000;
+        background-color: @prompt-side-color;
+        color: @code-side-color;
+      }
+
+      @media (min-width: 768px) {
+        background-color: @prompt-side-color;
+        border-color: @code-side-color;
+        color: @code-side-color;
+
+        &:hover {
+          background-color: @code-side-color;
+          color: @prompt-side-color;
+        }
       }
     }
   }
