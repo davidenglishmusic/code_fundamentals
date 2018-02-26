@@ -1,5 +1,6 @@
 @code-side-color: #FFFEFB;
 @prompt-side-color: #012;
+@tablet-min-width: 768px;
 
 * {
   box-sizing: border-box;
@@ -14,7 +15,7 @@ body {
   @media (min-width: 360px) {
     font-size: 16px;
   }
-  @media (min-width: 768px) {
+  @media (min-width: @tablet-min-width) {
     flex-direction: row;
   }
 
@@ -30,7 +31,7 @@ body {
     @media (min-height: 640px) {
       min-height: auto;
     }
-    @media (min-width: 768px) {
+    @media (min-width: @tablet-min-width) {
       width: 50%;
       height: 100vh;
     }
@@ -53,7 +54,7 @@ body {
 
     #preface {
       padding: 0 2rem 1rem;
-      @media (min-width: 768px) {
+      @media (min-width: @tablet-min-width) {
         padding-bottom: 2rem;
       }
     }
@@ -63,7 +64,7 @@ body {
       color: @code-side-color;
       padding: 1rem;
       border-radius: 5px;
-      @media (min-width: 768px) {
+      @media (min-width: @tablet-min-width) {
         padding: 4rem;
       }
 
@@ -78,7 +79,7 @@ body {
       position: absolute;
       bottom: 0;
       right: 0;
-      @media (min-width: 768px) {
+      @media (min-width: @tablet-min-width) {
         display: block;
       }
     }
@@ -93,7 +94,7 @@ body {
       position: absolute;
       top: 0;
       right: 0;
-      @media (min-width: 768px) {
+      @media (min-width: @tablet-min-width) {
         display: none;
       }
     }
@@ -125,7 +126,7 @@ body {
         background-color: @prompt-side-color;
         color: @code-side-color;
       }
-      @media (min-width: 768px) {
+      @media (min-width: @tablet-min-width) {
         background-color: @prompt-side-color;
         border-color: @code-side-color;
         color: @code-side-color;
