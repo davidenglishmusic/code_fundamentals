@@ -1,10 +1,11 @@
 const letterShowTime = 100;
 const scriptPath = 'script.json'
 const prefaceDiv = document.getElementById("preface");
-const codeWrapper = document.querySelector("#code-side .wrapper");
+const codepad = document.querySelector("#code-side .codepad");
 const promptWrapper = document.querySelector("#prompt-side .wrapper");
 const nextButton = document.querySelector("#nav #next");
 const previousButton = document.querySelector("#nav #previous");
+const runButtons = document.querySelectorAll(".run");
 let currentScene;
 let scenes;
 
@@ -35,6 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  for(const runButton of runButtons) {
+    runButton.addEventListener("click", () => {
+      if (currentScene !== undefined) {
+        promptWrapper.innerHTML = "";
+        revealPromptOutput(currentScene);
+      }
+    });
+  }
 });
 
 function loadJSON(callback) {
@@ -50,7 +60,7 @@ function loadJSON(callback) {
 }
 
 function runScene(scene) {
-  codeWrapper.innerHTML = "";
+  codepad.innerHTML = "";
   prefaceDiv.innerHTML = "";
   promptWrapper.innerHTML = "";
 
@@ -62,21 +72,13 @@ function runScene(scene) {
     let codeSpan = document.createElement('span');
     codeSpan.textContent = codeLine;
     codeSpan.className = 'line hide';
-    codeWrapper.appendChild(codeSpan);
+    codepad.appendChild(codeSpan);
     convertToHiddenLetters(codeSpan);
     setTimeout(() => {
       codeSpan.classList.remove('hide');
       typeCode(codeSpan);
     }, codeInitialDelay)
     codeInitialDelay += letterShowTime * codeSpan.childElementCount;
-  }
-
-  for (const promptLine of scene.prompt.split(/\n/)) {
-    let promptSpan = document.createElement('span');
-    promptSpan.textContent = promptLine;
-    promptSpan.className = 'line hide';
-    promptWrapper.appendChild(promptSpan);
-    promptSpan.classList.remove('hide');
   }
 }
 
@@ -97,4 +99,14 @@ function typeCode(line) {
       }, letterShowTime * i);
     }))(i);
   };
+}
+
+function revealPromptOutput(scene) {
+  for (const promptLine of scene.prompt.split(/\n/)) {
+    let promptSpan = document.createElement('span');
+    promptSpan.textContent = promptLine;
+    promptSpan.className = 'line hide';
+    promptWrapper.appendChild(promptSpan);
+    promptSpan.classList.remove('hide');
+  }
 }
