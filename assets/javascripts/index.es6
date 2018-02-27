@@ -6,6 +6,7 @@ const promptWrapper = document.querySelector("#prompt-side .wrapper");
 const nextButton = document.querySelector("#nav #next");
 const previousButton = document.querySelector("#nav #previous");
 const runButtons = document.querySelectorAll(".run");
+const noOutputInstruction = '(No output for this - click/tap the ">" button to proceed)'
 let currentScene;
 let scenes;
 
@@ -102,11 +103,18 @@ function typeCode(line) {
 }
 
 function revealPromptOutput(scene) {
-  for (const promptLine of scene.prompt.split(/\n/)) {
+  if (scene.prompt.length === 0) {
     let promptSpan = document.createElement('span');
-    promptSpan.textContent = promptLine;
-    promptSpan.className = 'line hide';
+    promptSpan.textContent = noOutputInstruction;
+    promptSpan.className = 'line';
     promptWrapper.appendChild(promptSpan);
-    promptSpan.classList.remove('hide');
+  }
+  else {
+    for (const promptLine of scene.prompt.split(/\n/)) {
+      let promptSpan = document.createElement('span');
+      promptSpan.textContent = promptLine;
+      promptSpan.className = 'line';
+      promptWrapper.appendChild(promptSpan);
+    }
   }
 }
