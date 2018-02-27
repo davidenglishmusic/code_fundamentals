@@ -1,4 +1,4 @@
-const letterShowTime = 100;
+const letterShowTime = 50;
 const scriptPath = 'script.json'
 const prefaceDiv = document.getElementById("preface");
 const codepad = document.querySelector("#code-side .codepad");
